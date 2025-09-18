@@ -91,8 +91,8 @@ def comparaison_malthus_verhulst(x0, t1, r, K):
 # -----------------------------------------
 
 """
-malthus(10, 10, 0.5)
+malthus(10, 10, 0.5)"""
 verhulst(10, 10, 0.5, 200)
-"""
 
-comparaison_malthus_verhulst(10, 10, 0.5, 200)
+"""
+comparaison_malthus_verhulst(10, 10, 0.5, 200)"""
