@@ -2,7 +2,7 @@
 
 le projet de maths là
 
-
-
-Miegemolle Sansus
+## Authors
+- Romain MIEGEMOLLE
+- Mathys SANSUS
 
