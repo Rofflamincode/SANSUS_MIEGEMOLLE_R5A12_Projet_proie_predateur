@@ -1,4 +1,4 @@
-from euler_population_models import *
+from euler_population_models import malthus_rhs, malthus_analytic, rk4, lotka_volterra_rhs, verhulst_rhs
 import matplotlib.pyplot as plt
 
 
@@ -15,7 +15,7 @@ malthus_rk4()
     
 def verhulst_rk4():
     x0, r, K, t1, h = 10.0, 0.5, 200.0, 20.0, 0.05
-    t, x_rk4 = rk4(logistic_rhs(r, K), t1, x0, h)
+    t, x_rk4 = rk4(verhulst_rhs(r, K), t1, x0, h)
     
     plt.plot(t, x_rk4)
     plt.axhline(K, color="gray", linestyle=":", label="Capacité K")
