@@ -49,7 +49,7 @@ def malthus_analytic(x0, r, t):
     return x0 * np.exp(r * t)
 
 # -----------------------------------------
-# Fonction logistic_rhs -> Donne le membre de droite de l'équation de verhulst
+# Fonction verhulst_rhs -> Donne le membre de droite de l'équation de verhulst
 #
 # Paramètre
 # r -> taux de croissance
@@ -58,7 +58,7 @@ def malthus_analytic(x0, r, t):
 # Retour
 # f(t, x) = r * x(1 - x/K)
 # -----------------------------------------
-def logistic_rhs(r, K):
+def verhulst_rhs(r, K):
     return lambda t, x: r * x * (1.0 - x / K)
 
 # -----------------------------------------
