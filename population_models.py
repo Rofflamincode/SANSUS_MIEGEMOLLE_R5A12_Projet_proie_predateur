@@ -79,14 +79,63 @@ def lotka_volterra_rhs(a, b, c, d):
         return np.array([a * x - b * x * y, -c * y + d * x * y])
     return f
 
+# -----------------------------------------
+# Fonction simulate_lotka_volterra_euler -> Simule le système Lotka-Volterra avec Euler
+#
+# Paramètre
+# a -> taux de croissance naturel des proie
+# b -> taux de prédation du prédateur sur la proie
+# c -> taux de mortalité du prédateur en l'absence de proie
+# d -> taux de croissance du prédateur du fait de sa prédation
+# x0 -> population initiale (proie)
+# y0 -> population initiale (prédateur)
+# t1 -> temps final
+# h -> pas de discrétisation
+#
+# Retour
+# Renvoie les x et y de la simulation
+# -----------------------------------------
+def simulate_lotka_volterra_euler(a, b, c, d, x0, y0, t1, h):
+    t, XY = euler(lotka_volterra_rhs(a, b, c, d), t1, np.array([x0, y0], dtype=float), h)
+    return t, XY[:, 0], XY[:, 1]
 
+# -----------------------------------------
+# Fonction simulate_lotka_volterra_euler -> Simule le système Lotka-Volterra avec rk4
+#
+# Paramètre
+# a -> taux de croissance naturel des proie
+# b -> taux de prédation du prédateur sur la proie
+# c -> taux de mortalité du prédateur en l'absence de proie
+# d -> taux de croissance du prédateur du fait de sa prédation
+# x0 -> population initiale (proie)
+# y0 -> population initiale (prédateur)
+# t1 -> temps final
+# h -> pas de discrétisation
+#
+# Retour
+# Renvoie les x et y de la simulation
+# -----------------------------------------
+def simulate_lotka_volterra_rk4(a, b, c, d, x0, y0, t1, h):
+    t, XY = rk4(lotka_volterra_rhs(a, b, c, d), t1, np.array([x0, y0], dtype=float), h)
+    return t, XY[:, 0], XY[:, 1]
 
+# -----------------------------------------
+# Fonction rk4 -> Résout une équation différentielle par la méthode de Runge-Kutta d’ordre 4
+#
+# Paramètres
+# f  -> fonction dérivée f(t, y) définissant l’EDO ou le système d’EDO
+# t1 -> temps final
+# y0 -> condition(s) initiale(s) (scalaire ou vecteur)
+# h  -> pas de discrétisation
+#
+# Retour
+# Renvoie :
+#  - t_vals : tableau des instants simulés
+#  - Y      : tableau des solutions correspondantes
+#             -> si y0 est scalaire : vecteur 1D
+#             -> si y0 est vecteur : matrice 2D
+# -----------------------------------------
 def rk4(f, t1, y0, h):
-    """
-    Résout y'(t)=f(t,y), y(0)=y0 sur [0,t1] par Runge-Kutta ordre 4.
-    y0 peut être un scalaire ou un vecteur (liste/np.array).
-    Retourne (t_vals, Y) avec Y de même forme que euler(...).
-    """
     N = int(round(t1 / h))
     t_vals = np.linspace(0.0, N*h, N+1)
     y = np.array(y0, dtype=float)

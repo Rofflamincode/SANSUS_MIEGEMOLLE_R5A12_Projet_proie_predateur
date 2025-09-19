@@ -89,10 +89,11 @@ def comparaison_malthus_verhulst(x0, t1, r, K):
 # -----------------------------------------
 # Test
 # -----------------------------------------
+x0 = 10.0
+t1 = 60
+r = 0.5
+K = 15000
 
-"""
-malthus(10, 10, 0.5)"""
-verhulst(10, 10, 0.5, 200)
-
-"""
-comparaison_malthus_verhulst(10, 10, 0.5, 200)"""
+malthus(x0, t1, r)
+verhulst(x0, t1, r, K)
+comparaison_malthus_verhulst(x0, t1, r, K)
