@@ -78,3 +78,27 @@ def lotka_volterra_rhs(a, b, c, d):
         x, y = XY
         return np.array([a * x - b * x * y, -c * y + d * x * y])
     return f
+
+
+
+def rk4(f, t1, y0, h):
+    """
+    Résout y'(t)=f(t,y), y(0)=y0 sur [0,t1] par Runge-Kutta ordre 4.
+    y0 peut être un scalaire ou un vecteur (liste/np.array).
+    Retourne (t_vals, Y) avec Y de même forme que euler(...).
+    """
+    N = int(round(t1 / h))
+    t_vals = np.linspace(0.0, N*h, N+1)
+    y = np.array(y0, dtype=float)
+    Y = np.zeros((t_vals.size, y.size if y.ndim else 1))
+
+    for i, t in enumerate(t_vals):
+        Y[i] = y if y.ndim else [y]
+        k1 = np.array(f(t, y))
+        k2 = np.array(f(t + h/2, y + (h/2)*k1))
+        k3 = np.array(f(t + h/2, y + (h/2)*k2))
+        k4 = np.array(f(t + h,   y + h*k3))
+        y = y + (h/6.0)*(k1 + 2*k2 + 2*k3 + k4)
+
+    return t_vals, Y.squeeze()
+
