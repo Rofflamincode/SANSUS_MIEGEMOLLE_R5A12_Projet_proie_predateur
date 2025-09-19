@@ -8,7 +8,7 @@ x0 = 10.0                                       # population initiale (proies)
 y0 = 5.0                                        # population initiale (prédateur)
 r = 0.5                                         # taux de reproduction
 t1 = 60                                         # temps final
-h = 0.001                                       # pas de temps
+h = 0.1                                         # pas de temps
 K = 15000                                       # capacité de charge (seuil maximal stable)
 a = 1                                           # taux de croissance naturel des proie
 b = 0.1                                         # taux de prédation du prédateur sur la proie
@@ -49,7 +49,7 @@ plt.show()
 # Malthus - rk4
 # -----------------------------------------
 plt.figure()
-plt.loglog(t, x_malthus_exact, color="black")
+plt.loglog(t, x_malthus_exact, label="Solution analytique", color="black")
 plt.loglog(t, x_malthus_rk4, "--", label="Méthode RK4", color="red")
 plt.xlabel("Temps t")
 plt.ylabel("Population N(t)")
@@ -66,7 +66,6 @@ plt.plot(t, x_verhulst_euler, color="black")
 plt.xlabel("Temps t")
 plt.ylabel("Population N(t)")
 plt.title("Modèle de Verhulst - Euler")
-plt.legend()
 plt.grid()
 plt.show()
 
@@ -78,7 +77,6 @@ plt.plot(t, x_verhulst_rk4, color="black")
 plt.xlabel("Temps t")
 plt.ylabel("Population N(t)")
 plt.title("Modèle de Verhulst - rk4")
-plt.legend()
 plt.grid()
 plt.show()
 
